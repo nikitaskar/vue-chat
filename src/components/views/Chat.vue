@@ -35,8 +35,7 @@
   .messageInterface
     display inline-block
     flex-grow inherit
-    padding 15px
-    overflow auto
+    padding 15px 20px
 
   main.chat
     flex-grow 1

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ul>
+  <div class="messageList">
+    <ul ref="chat">
       <message v-for="message in messages" :data="message"></message>
     </ul>
   </div>
@@ -18,5 +18,11 @@
 </script>
 
 <style lang="stylus">
+.messageList
+  height 90%
+  overflow auto
+
+  ul
+    display inline
 
 </style>

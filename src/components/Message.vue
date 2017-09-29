@@ -1,7 +1,10 @@
 <template>
-  <li v-bind:class="[classUser ? 'me' : 'him']">
-    {{ data.body }}
-  </li>
+  <transition name="message">
+    <li v-bind:class="[classUser ? 'me' : 'him']">
+      <span>{{ data.author.username }}</span>
+      <p>{{ data.body }}</p>
+    </li>
+  </transition>
 </template>
 
 <script type="text/javascript">
@@ -14,6 +17,13 @@
     },
     created () {
       this.me()
+    },
+    mounted () {
+      this.$nextTick(() => {
+        // this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
+        let messageList = document.querySelector('.messageList')
+        messageList.scrollTop = messageList.scrollHeight
+      })
     },
     methods: {
       me () {
@@ -34,22 +44,55 @@
   li
     display inline-block;
     clear both;
-    padding 15px;
     border-radius 30px;
     margin-bottom 2px;
-    width auto;
-    max-width 200px
-    font-family Arial
-    color white
-    background #ffc12d
-    padding 10px
-    border-radius 5px
-    float left
+    font-size 13px
+    margin 3px 0
+
+    p
+      width auto;
+      max-width 320px
+      font-family Arial
+      color white
+      padding 10px
+      margin-top 17px
+      margin-bottom 5px
+      border-radius 20px
+      word-wrap break-word
+      height auto
+
+
+    span
+      color #696868
+      font-family Arial
+      font-size 11px
+
    //float
   .me
     float right
+    margin-right 7px
+    p
+      background #df4c44
+
+    span
+      float right
+
 
   .him
     float left
+    p
+      background #3ebddd
+      color white
+    span
+      float left
+
+.message-enter-active
+  transition: all .5s ease-out
+
+.message-enter
+  opacity 0
+  transform translateX(-10px)
+
+
 
 </style>
